@@ -17,7 +17,7 @@ def test_buy_phone():
     start.select_product_from_slider()              # запускаем метод класса StartPage
 
     grill = GrillPage(driver)                       # создаем экземпляр класса GrillPage
-    info_1 = grill.select_product_from_slider()     # запускаем метод класса GrillPage
+    info_1 = grill.about_grill()                    # запускаем метод класса GrillPage
     driver.back()                                   # возвращаемся на главную страницу
 
     smart = SmartphonesPage(driver)                 # создаем экземпляр класса SmartphonesPage

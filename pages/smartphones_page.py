@@ -4,6 +4,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from base.base import Base
 from selenium.webdriver.support import expected_conditions as EC
 
+from utilities.logger import Logger
+
 
 class SmartphonesPage(Base):
 
@@ -101,17 +103,19 @@ class SmartphonesPage(Base):
 
     # Methods
     def do_smartphones_page(self):
-        self.get_current_url()                          # отображаем url открытой страницы
-        self.assert_url('https://www.onlinetrade.ru/')  # сверяем url с изначальным адресом
-        self.click_catalogue()                          # нажимаем на кнопку "Каталог"
-        self.click_get_link_smartphones()               # кликаем по ссылке 'Смартфоны'
-        self.click_in_detail()                          # меняем вид отображение товаров на "подробно"
-        self.input_diagonal()                           # кликаем в поле максимального значения диагонали, очищаем и вводим значение 6.5
-        self.click_brand()                              # выбираем бренд "INOI"
-        info = self.info_product()                      # присваиваем переменной список значений: код, имя и цену товара
-        self.click_button_buy_product()                 # кликаем по кнопке "Купить"
-        self.click_place_an_order()                     # нажимаем "Оформить заказ"
-        self.driver.refresh()                           # обновляем страницу, т.к. не авторизованы
-        return info                                     # возвращаем код, имя и цену товара
+        Logger.add_start_step(method='about_grill')         # начало логгирования
+        url = self.get_current_url()                        # отображаем url открытой страницы и присваиваем переменной
+        self.assert_url('https://www.onlinetrade.ru/')      # сверяем url с изначальным адресом
+        self.click_catalogue()                              # нажимаем на кнопку "Каталог"
+        self.click_get_link_smartphones()                   # кликаем по ссылке 'Смартфоны'
+        self.click_in_detail()                              # меняем вид отображение товаров на "подробно"
+        self.input_diagonal()                               # кликаем в поле максимального значения диагонали, очищаем и вводим значение 6.5
+        self.click_brand()                                  # выбираем бренд "INOI"
+        info = self.info_product()                          # присваиваем переменной список значений: код, имя и цену товара
+        self.click_button_buy_product()                     # кликаем по кнопке "Купить"
+        self.click_place_an_order()                         # нажимаем "Оформить заказ"
+        self.driver.refresh()                               # обновляем страницу, т.к. не авторизованы
+        Logger.add_end_step(url=url, method='about_grill')  # конец логгирования
+        return info                                         # возвращаем код, имя и цену товара
 
 
