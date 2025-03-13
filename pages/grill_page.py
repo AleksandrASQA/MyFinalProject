@@ -61,10 +61,10 @@ class GrillPage(Base):
     def about_grill(self):
         with allure.step("About grill"):
             Logger.add_start_step(method='about_grill')         # начало логгирования
-            url = self.get_current_url()                        # отображаем url открытой страницы и присваиваем переменной
+            self.get_current_url()                              # отображаем url открытой страницы
             info = self.info_product()                          # сохраняем в переменную список значений: код, название и цену товара
             self.click_buy_button()                             # кликаем на кнопку "Купить"
             self.click_continue_shopping()                      # нажимаем на кнопку "Продолжить покупки"
-            Logger.add_end_step(url=url, method='about_grill')  # конец логгирования
+            Logger.add_end_step(url=self.driver.current_url, method='about_grill')  # конец логгирования
             return info                                         # возвращаем код, имя и цену товара
 

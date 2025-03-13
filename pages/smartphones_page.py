@@ -104,8 +104,8 @@ class SmartphonesPage(Base):
     # Methods
     def find_and_buy_smartphone(self):
         with allure.step("Find and buy smartphone"):
-            Logger.add_start_step(method='about_grill')         # начало логгирования
-            url = self.get_current_url()                        # отображаем url открытой страницы и присваиваем переменной
+            Logger.add_start_step(method='find_and_buy_smartphone')         # начало логгирования
+            self.get_current_url()                              # отображаем url открытой страницы
             self.assert_url('https://www.onlinetrade.ru/')      # сверяем url с изначальным адресом
             self.click_catalogue()                              # нажимаем на кнопку "Каталог"
             self.click_get_link_smartphones()                   # кликаем по ссылке 'Смартфоны'
@@ -116,7 +116,7 @@ class SmartphonesPage(Base):
             self.click_button_buy_product()                     # кликаем по кнопке "Купить"
             self.click_place_an_order()                         # нажимаем "Оформить заказ"
             self.driver.refresh()                               # обновляем страницу, т.к. не авторизованы
-            Logger.add_end_step(url=url, method='about_grill')  # конец логгирования
+            Logger.add_end_step(url=self.driver.current_url, method='find_and_buy_smartphone')  # конец логгирования
             return info                                         # возвращаем код, имя и цену товара
 
 

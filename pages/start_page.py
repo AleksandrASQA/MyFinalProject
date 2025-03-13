@@ -51,9 +51,9 @@ class StartPage(Base):
             Logger.add_start_step(method='select_product_from_slider')          # начало логгирования
             self.driver.get(self.url)                                           # открываем наш url
             self.driver.maximize_window()                                       # раскрываем страницу на весь экран
-            url = self.get_current_url()                                        # отображаем текущий url адрес и присваиваем переменной
+            self.get_current_url()                                              # отображаем текущий url адрес
             self.click_accept_cookie()                                          # принимаем куки
             self.open_grill()                                                   # открываем страницу гриля из 6 слайда в первом слайдере
-            Logger.add_end_step(url=url, method='select_product_from_slider')   # конец логгирования
+            Logger.add_end_step(url=self.driver.current_url, method='select_product_from_slider')   # конец логгирования
 
 

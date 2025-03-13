@@ -86,11 +86,11 @@ class BasketPage(Base):
     def check_basket_page(self, info1, info2):
         with allure.step("Check basket page"):
             Logger.add_start_step(method='check_basket_page')           # начало логгирования
-            url = self.get_current_url()                                # отображаем url открытой страницы, и присваиваем его переменной
+            self.get_current_url()                                      # отображаем url открытой страницы
             self.assert_word(self.get_basket(), 'Корзина')        # сравниваем значение локатора заголовка со строкой "Корзина"
             self.check_first_product(info1)                             # проводим проверку значений первого товара
             self.check_second_product(info2)                            # проводим проверку значений второго товара
             self.check_total_price(info1[2], info2[2])                  # сравниваем итоговую цену с суммой цен двух товаров
             self.get_screenshot()                                       # делаем скриншот и сохраняем его в папку screen
-            Logger.add_end_step(url=url, method='check_basket_page')    # конец логгирования
+            Logger.add_end_step(url=self.driver.current_url, method='check_basket_page')    # конец логгирования
 
