@@ -17,15 +17,15 @@ class StartPage(Base):
 
     # Locators
     accept_cookie = '//a[contains(text(), "Принять")]'  # локатор кнопки "Принять" во всплывающем окне
-    first_slider_slide6 = '//span[@aria-label="Go to slide 6"]'  # локатор 5 слайда в первом слайдере
-    grill = '//a[@href="/catalogue/aerogrili-c1145/kitfort/aerogril_kitfort_kt_2263-4591425.html"]'  # локатор ссылки на товар
+    first_slider_slide = '//span[@aria-label="Go to slide 1"]'  # локатор 1 слайда в первом слайдере
+    grill = '//a[contains(text(), "Аэрогриль Kitfort КТ-2263")]'  # локатор ссылки на товар
 
     # Getters
     def get_accept_cookie(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.accept_cookie)))
 
-    def get_first_slider_slide6(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.first_slider_slide6)))
+    def get_first_slider_slide(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.first_slider_slide)))
 
     def get_grill(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.grill)))
@@ -36,12 +36,18 @@ class StartPage(Base):
         print("Нажимаем на кнопку 'Принять куки'")
 
     def open_grill(self):
-        self.get_first_slider_slide6().click()
-        time.sleep(2)
-        print("В первом слайдере выбираем 7 слайд")
-        self.get_grill().click()
-        time.sleep(2)
-        print('Открываем страницу товара "Гриль"')
+        for i in range(2, 26):
+            try:
+                self.get_first_slider_slide().click()
+                time.sleep(2)
+                print("Ищем в первом слайде товар 'Гриль'")
+                self.get_grill().click()
+                time.sleep(2)
+                print('Открываем страницу товара "Гриль"')
+                break
+            except:
+                first_slider_slide = f'//span[@aria-label="Go to slide {i}"]'
+
 
     # Methods
     def select_product_from_slider(self):
@@ -51,5 +57,5 @@ class StartPage(Base):
             self.driver.maximize_window()  # раскрываем страницу на весь экран
             self.get_current_url()  # отображаем текущий url адрес
             self.click_accept_cookie()  # принимаем куки
-            self.open_grill()   # открываем страницу гриля из 6 слайда в первом слайдере
+            self.open_grill()  # открываем страницу гриля из 6 слайда в первом слайдере
             Logger.add_end_step(url=self.driver.current_url, method='select_product_from_slider')  # конец логгирования

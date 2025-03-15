@@ -29,7 +29,6 @@ def test_buy_products():
     basket.check_basket_page(info_1, info_2)        # запускаем метод класса BasketPage
 
     print('Finish test')
-    time.sleep(5)
 
 
 
