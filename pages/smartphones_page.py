@@ -21,7 +21,7 @@ class SmartphonesPage(Base):
     brand = '//a[@title="INOI"]'                                                # локатор выделяемой кнопки бренда INOI
     show_products = '//a[@title="Показать товары по выбранным условиям"]'       # локатор кнопки "Показать"
     code_product = '//div[@class="indexGoods__item__storeCode"]'                # локатор кода продукта
-    name_product = '(//a[@href="/catalogue/smartfony-c13/inoi/smartfon_inoi_note_13s_4_128gb_fioletovyy_4660042758978-4492180.html"])[2]'   # локатор имени продукта
+    name_product = '//a[contains(text(), "INOI Note 13s 4/128GB Фиолетовый")]'  # локатор имени продукта
     price_product = '//span[@class="price js__actualPrice"]'                    # локатор цены продукта
     button_buy_product = '//a[@data-handler="buy"]'                             # локатор кнопки "Купить"
     place_an_order = '//a[@id="js__popup_addedToCart__cartLinkID"]'             # локатор кнопки "Оформить заказ"
